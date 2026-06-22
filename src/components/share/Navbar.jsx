@@ -1,13 +1,22 @@
 'use client';
 
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { Menu, X, Utensils } from 'lucide-react';
+
+import { authClient, useSession } from '@/lib/auth-client';
+import { Avatar } from '@heroui/react';
+import { toast } from 'react-toastify';
 
 const Navbar = () => {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
+  const router = useRouter();
+  const [mounted, setMounted] = useState(false);
+
+  const { data: session, isPending, refetch } = useSession();
+  const user = session?.user;
 
   const navLinks = [
     { name: 'Home', href: '/' },
@@ -15,6 +24,18 @@ const Navbar = () => {
   ];
 
   const closeMenu = () => setIsOpen(false);
+
+  const handleSignOut = async () => {
+    try {
+      await authClient.signOut();
+      await refetch?.();
+      toast.success('Signed out successfully');
+      router.refresh();
+      router.replace('/');
+    } catch {
+      toast.error('Failed to sign out');
+    }
+  };
 
   return (
     <header className="sticky top-0 z-50 bg-[#1a0f0c] border-b border-orange-950/20">
@@ -26,7 +47,6 @@ const Navbar = () => {
             <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-orange-500">
               <Utensils size={20} className="text-white" />
             </div>
-
             <span className="text-xl md:text-2xl font-bold">RecipeHub</span>
           </Link>
 
@@ -55,21 +75,50 @@ const Navbar = () => {
             })}
           </div>
 
-          {/* Desktop Buttons */}
-          <div className="hidden md:flex items-center gap-4">
-            <Link
-              href="/login"
-              className="text-[#f5dec9]/80 hover:text-white transition"
-            >
-              Login
-            </Link>
+          {/* Desktop Auth */}
+          <div className="flex items-center gap-4">
+            {isPending ? (
+              <div className="hidden md:flex items-center gap-3 animate-pulse">
+                <div className="h-9 w-9 rounded-full bg-orange-200/20" />
+                <div className="h-8 w-20 rounded-xl bg-orange-200/20" />
+              </div>
+            ) : user ? (
+              <div className="hidden md:flex items-center gap-2">
+                <Avatar>
+                  <Avatar.Image
+                    alt={user?.name}
+                    src={user?.image}
+                    width={40}
+                    height={40}
+                    className=" rounded-full object-cover cursor-pointer"
+                  />
+                  <Avatar.Fallback>{user.name.charAt(0)}</Avatar.Fallback>
+                </Avatar>
 
-            <Link
-              href="/signup"
-              className="rounded-full bg-orange-500 px-5 py-2.5 font-medium text-white transition hover:bg-orange-600"
-            >
-              Register
-            </Link>
+                <button
+                  onClick={handleSignOut}
+                  className="bg-orange-500 px-3 py-1.5 rounded-2xl cursor-pointer hover:bg-orange-600 duration-500 text-white"
+                >
+                  SignOut
+                </button>
+              </div>
+            ) : (
+              <div className="hidden md:flex items-center gap-4">
+                <Link
+                  href="/login"
+                  className="text-[#f5dec9]/80 hover:text-white transition"
+                >
+                  Login
+                </Link>
+
+                <Link
+                  href="/signup"
+                  className="rounded-full bg-orange-500 px-5 py-2.5 font-medium text-white transition hover:bg-orange-600"
+                >
+                  Register
+                </Link>
+              </div>
+            )}
           </div>
 
           {/* Mobile Button */}
@@ -78,7 +127,11 @@ const Navbar = () => {
             className="md:hidden text-[#f5dec9]"
             aria-label="Toggle Menu"
           >
-            {isOpen ? <X size={28} /> : <Menu size={28} />}
+            {isOpen ? (
+              <X size={28} className="text-orange-600" />
+            ) : (
+              <Menu size={28} />
+            )}
           </button>
         </div>
 
@@ -99,6 +152,7 @@ const Navbar = () => {
           }`}
         >
           <div className="p-5 space-y-3">
+            {/* Links */}
             {navLinks.map(link => {
               const isActive = pathname === link.href;
 
@@ -118,22 +172,52 @@ const Navbar = () => {
               );
             })}
 
+            {/* Auth Mobile */}
             <div className="pt-4 mt-4 border-t border-orange-950/30 space-y-3">
-              <Link
-                href="/login"
-                onClick={closeMenu}
-                className="block text-center rounded-xl py-3 text-[#f5dec9]/80 hover:bg-white/5 transition"
-              >
-                Login
-              </Link>
+              {isPending ? (
+                <div className="flex items-center gap-3 animate-pulse">
+                  <div className="h-9 w-9 rounded-full bg-orange-200/20" />
+                  <div className="h-8 w-20 rounded-xl bg-orange-200/20" />
+                </div>
+              ) : user ? (
+                <div className="flex items-center gap-2">
+                  <Avatar>
+                    <Avatar.Image alt={user?.name} src={user?.image} />
+                    <Avatar.Fallback>{user.name.charAt(0)}</Avatar.Fallback>
+                  </Avatar>
 
-              <Link
-                href="/register"
-                onClick={closeMenu}
-                className="block text-center rounded-xl bg-orange-500 py-3 font-semibold text-white hover:bg-orange-600 transition"
-              >
-                Register
-              </Link>
+                  <button
+                    onClick={async () => {
+                      await authClient.signOut();
+                      toast.success('Signed out successfully');
+                      router.refresh();
+                      router.push('/');
+                      closeMenu();
+                    }}
+                    className="bg-red-400 px-3 py-1.5 rounded-2xl cursor-pointer hover:bg-red-700 duration-500 text-white"
+                  >
+                    SignOut
+                  </button>
+                </div>
+              ) : (
+                <>
+                  <Link
+                    href="/login"
+                    onClick={closeMenu}
+                    className="block text-center rounded-xl py-3 text-[#f5dec9]/80 hover:bg-white/5 transition"
+                  >
+                    Login
+                  </Link>
+
+                  <Link
+                    href="/signup"
+                    onClick={closeMenu}
+                    className="block text-center rounded-xl bg-orange-500 py-3 font-semibold text-white hover:bg-orange-600 transition"
+                  >
+                    Register
+                  </Link>
+                </>
+              )}
             </div>
           </div>
         </div>

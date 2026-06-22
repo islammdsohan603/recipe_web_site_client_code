@@ -7,7 +7,7 @@ import { toast } from 'react-toastify';
 import { FaEye, FaEyeSlash, FaUser } from 'react-icons/fa';
 import { FiImage } from 'react-icons/fi';
 import { MdEmail } from 'react-icons/md';
-import { authClient } from '@/app/lib/auth-client';
+import { authClient } from '@/lib/auth-client';
 
 export default function SignupPage() {
   const [showPassword, setShowPassword] = useState(false);
@@ -46,19 +46,12 @@ export default function SignupPage() {
 
     if (data) {
       try {
-        const { default: api } = await import('@/lib/api');
-        await api.post('/api/users', {
-          name: users.name,
-          email: users.email,
-          image: users.image,
-          role: role,
-        });
-        await api.post('/api/jwt', { email: users.email });
+        toast.success('Account successfully created.');
+        router.refresh();
+        router.push('/login');
       } catch (err) {
         console.error('Sync error', err);
       }
-      toast.success('Account successfully created.');
-      router.push('/login');
     }
 
     if (error) {
