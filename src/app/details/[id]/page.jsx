@@ -1,9 +1,16 @@
+import RecipeDetailsCard from '@/components/browserecipedata/RecipeDetailsCard';
+import { getDetailsRecipeData } from '@/db/recipedata';
 import React from 'react';
 
-const DetailsRecipe = () => {
+const DetailsRecipe = async ({ params }) => {
+  const resolvedParams = await params;
+  const id = resolvedParams.id;
+
+  const recipedetails = await getDetailsRecipeData(id);
+
   return (
-    <div>
-      <h1>sohan</h1>
+    <div className="p-8 text-white">
+      <RecipeDetailsCard recipedetails={recipedetails} />
     </div>
   );
 };
