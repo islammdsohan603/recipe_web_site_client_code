@@ -2,14 +2,14 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import PopularRecipeCard from './PopularCard'; // নিশ্চিত করুন পাথ ঠিক আছে
+import PopularRecipeCard from './PopularCard';
 
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.25, // প্রতিটি কার্ডের মাঝে ০.২৫ সেকেন্ডের নিখুঁত ব্যবধান
+      staggerChildren: 0.25,
     },
   },
 };
