@@ -6,7 +6,7 @@ import { FaArrowRightLong } from 'react-icons/fa6';
 
 export default function SeasonalHarvestCard() {
   return (
-    <section id="harvest" className="bg-[#0c0604] px-4 py-14 sm:px-6 lg:py-20">
+    <section className="bg-[#0c0604] px-4 py-14 sm:px-6 lg:py-20">
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
