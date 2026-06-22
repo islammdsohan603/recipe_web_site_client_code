@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { toast } from 'react-toastify';
 import { FaEye, FaEyeSlash, FaUser } from 'react-icons/fa';
-import { FiImage } from 'react-icons/fi';
+
 import { MdEmail } from 'react-icons/md';
 import { authClient } from '@/app/lib/auth-client';
 
