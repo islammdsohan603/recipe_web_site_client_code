@@ -6,7 +6,6 @@ import { motion } from 'framer-motion';
 import { Clock } from 'lucide-react';
 import Link from 'next/link';
 
-// চাইল্ড অ্যানিমেশন ভ্যারিয়েন্ট (প্যারেন্ট গ্রিডের সাথে লিঙ্কড)
 const cardVariants = {
   hidden: { opacity: 0, y: 30 },
   visible: {

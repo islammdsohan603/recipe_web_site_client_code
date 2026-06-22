@@ -35,7 +35,7 @@ export const getFeaturedData = async () => {
 
 // all recipe api
 
-export const gerAllRecipeData = async () => {
+export const getAllRecipeData = async () => {
   try {
     const res = await fetch(`${baseUrl}/api/all-recipe`, { cache: 'no-store' });
     if (!res.ok) {
