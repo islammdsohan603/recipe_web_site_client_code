@@ -1,4 +1,5 @@
 
+
 const baseUrl = process.env.NEXT_PULIC_SERVER_URL;
 
 // get Pupular api
@@ -33,18 +34,21 @@ export const getFeaturedData = async () => {
 }
 
 
-// all recipe api
+//get all and fillter recipe api
 
-export const getAllRecipeData = async () => {
+export const getAllRecipeData = async (category = '') => {
   try {
-    const res = await fetch(`${baseUrl}/api/all-recipe`, { cache: 'no-store' });
-    if (!res.ok) {
-      throw new Error('Failed to fetch data');
-    }
-    const result = await res.json();
-    return result;
+    const res = await fetch(`${baseUrl}/api/all-recipe?category=${category}`, {
+      cache: 'no-store'
+    })
+
+    if (!res.ok) throw new Error("Failed to fetch recipes")
+
+    return await res.json()
+
   } catch (error) {
-    console.log(error)
+    console.error("Error fetching recipes:", error);
+    return [];
   }
 }
 
