@@ -36,9 +36,9 @@ export const getFeaturedData = async () => {
 
 //get all and fillter recipe api
 
-export const getAllRecipeData = async (category = '') => {
+export const getAllRecipeData = async (category = '', page = 1) => {
   try {
-    const res = await fetch(`${baseUrl}/api/all-recipe?category=${category}`, {
+    const res = await fetch(`${baseUrl}/api/all-recipe?category=${category}&page=${page}`, {
       cache: 'no-store'
     })
 
@@ -48,7 +48,7 @@ export const getAllRecipeData = async (category = '') => {
 
   } catch (error) {
     console.error("Error fetching recipes:", error);
-    return [];
+    return { recipes: [], totalPages: 1 };
   }
 }
 
