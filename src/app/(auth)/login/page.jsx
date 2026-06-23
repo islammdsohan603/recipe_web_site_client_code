@@ -4,8 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { toast } from 'react-toastify';
-import { FaEye, FaEyeSlash, FaUser } from 'react-icons/fa';
-
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { MdEmail } from 'react-icons/md';
 import { authClient } from '@/lib/auth-client';
 
@@ -14,8 +13,6 @@ const LoginPage = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
-  const router = useRouter();
-
   const handleSubmit = async e => {
     e.preventDefault();
     setError('');
@@ -23,38 +20,33 @@ const LoginPage = () => {
     const formData = new FormData(e.currentTarget);
     const users = Object.fromEntries(formData.entries());
     const passwordValue = users.password;
+    const emailValue = users.email;
 
-    if (passwordValue.length < 6) {
+    // পাসওয়ার্ড ভ্যালিডেশন
+    if (passwordValue.length < 6)
       return setError('Password must be at least 6 characters.');
-    }
-
-    if (!/[A-Z]/.test(passwordValue)) {
+    if (!/[A-Z]/.test(passwordValue))
       return setError('Password must contain at least one uppercase letter.');
-    }
-
-    if (!/[a-z]/.test(passwordValue)) {
+    if (!/[a-z]/.test(passwordValue))
       return setError('Password must contain at least one lowercase letter.');
-    }
 
     const { data, error } = await authClient.signIn.email({
-      email: users.email,
+      email: emailValue,
       password: passwordValue,
     });
 
     if (data) {
-      try {
-        const { default: api } = await import('@/lib/api');
-        await api.post('/api/jwt', { email: users.email });
-      } catch (err) {
-        console.error('JWT Sync error', err);
-      }
-      toast.success('Login successful');
-      router.refresh();
-      window.location.href = '/';
-    }
+      toast.success('Login successful!');
 
-    if (error) {
-      toast.error(error.message);
+      const userRole = data.user?.role;
+
+      if (userRole && userRole.toLowerCase() === 'admin') {
+        window.location.href = '/dashboard/admin';
+      } else {
+        window.location.href = '/';
+      }
+    } else {
+      toast.error(`Login Failed: ${error?.message || 'Unknown error'}`);
     }
   };
 
@@ -83,7 +75,6 @@ const LoginPage = () => {
           <form onSubmit={handleSubmit} className="space-y-5">
             <div className="relative">
               <MdEmail className="absolute left-4 top-1/2 -translate-y-1/2 text-lg text-[#cdb7aa]" />
-
               <input
                 type="email"
                 name="email"
@@ -116,7 +107,6 @@ const LoginPage = () => {
 
             <div className="rounded-xl border border-white/10 bg-[#1a0f0c]/70 p-4">
               <p className="mb-2 text-sm text-white">Password Requirements</p>
-
               <div className="space-y-1 text-xs">
                 <p
                   className={
@@ -125,7 +115,6 @@ const LoginPage = () => {
                 >
                   - Minimum 6 characters
                 </p>
-
                 <p
                   className={
                     /[A-Z]/.test(password)
@@ -135,7 +124,6 @@ const LoginPage = () => {
                 >
                   - One uppercase letter
                 </p>
-
                 <p
                   className={
                     /[a-z]/.test(password)
@@ -158,17 +146,17 @@ const LoginPage = () => {
               type="submit"
               className="w-full rounded-xl bg-[#ff6d33] py-3 font-semibold text-white shadow-[0_0_30px_rgba(255,109,51,.25)] transition-all duration-300 hover:scale-[1.02] hover:bg-[#ff5a1f]"
             >
-              Create Account
+              Sign In
             </button>
           </form>
 
           <div className="mt-6 text-center text-sm text-[#cdb7aa]">
-            You dont have an account?{' '}
+            You don't have an account?{' '}
             <Link
               href="/signup"
               className="font-semibold text-orange-400 transition hover:text-orange-300"
             >
-              Registar
+              Register
             </Link>
           </div>
         </div>
