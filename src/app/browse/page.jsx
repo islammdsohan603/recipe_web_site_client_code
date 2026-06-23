@@ -3,8 +3,11 @@ import { getAllRecipeData } from '@/db/recipedata';
 import React from 'react';
 import SelectDropdown from '@/components/browserecipedata/SelectDropdown';
 
-const Browsepage = async () => {
-  const browseallrecipe = await getAllRecipeData();
+const Browsepage = async ({ searchParams }) => {
+  const resolvedSearchParams = await searchParams;
+  const category = resolvedSearchParams?.category || 'all';
+
+  const browseallrecipe = await getAllRecipeData(category);
 
   return (
     <div className="bg-[#0f0907] text-white min-h-screen py-12 px-4 sm:px-6 lg:px-8">
