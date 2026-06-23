@@ -5,8 +5,18 @@ import { Avatar } from '@heroui/react';
 import { useSession } from '@/lib/auth-client';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
-import { User, Mail, Crown, Shield, Camera, Save, Loader2 } from 'lucide-react';
+import {
+  User,
+  Mail,
+  Crown,
+  Shield,
+  Camera,
+  Save,
+  Loader2,
+  SquarePen,
+} from 'lucide-react';
 import { motion } from 'framer-motion';
+import ProfileModaFormButtons from '@/components/dashboard/ProfileModaFormButtons';
 
 const ProfilePage = () => {
   const { data: session, isPending } = useSession();
@@ -49,12 +59,20 @@ const ProfilePage = () => {
         <div className="rounded-2xl border border-orange-900/20 bg-[#1a0f0c] overflow-hidden">
           {/* Banner */}
           <div className="h-32 bg-linear-to-r from-orange-500/20 via-amber-500/10 to-orange-500/20 relative">
-            <div className="absolute -bottom-10 left-6">
-              <div className="w-20 h-20 rounded-full bg-lineart-to-br from-orange-400 to-orange-600 flex items-center justify-center text-white text-3xl font-bold border-4 border-[#1a0f0c] shadow-xl">
-                <Avatar>
-                  <Avatar.Image alt={user?.name} src={user?.image} />
-                  <Avatar.Fallback> {user?.name.charAt(0)} </Avatar.Fallback>
-                </Avatar>
+            <div className="absolute -bottom-10 left-6 flex items-end gap-4">
+              <div className="relative">
+                <div className="w-20 h-20 rounded-full border-4 border-[#1a0f0c] overflow-hidden shadow-xl">
+                  <Avatar className="w-full h-full">
+                    <Avatar.Image alt={user?.name} src={user?.image} />
+                    <Avatar.Fallback>{user?.name?.charAt(0)}</Avatar.Fallback>
+                  </Avatar>
+                </div>
+              </div>
+
+              {/* Edit Button */}
+
+              <div>
+                <ProfileModaFormButtons />
               </div>
             </div>
           </div>
