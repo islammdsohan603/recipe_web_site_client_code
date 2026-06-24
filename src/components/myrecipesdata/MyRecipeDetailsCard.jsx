@@ -28,8 +28,8 @@ const MyRecipeDetailsCard = ({ viewData }) => {
         {/* Back Button */}
         <div className="flex items-center justify-start">
           <Link
-            href="/"
-            className="inline-flex items-center gap-2 text-xs md:text-sm text-neutral-400 hover:text-orange-300 transition-colors group py-1"
+            href="/dashboard/user"
+            className="inline-flex items-center gap-2 text-xs md:text-sm   text-white font-bold bg-[#ff6a00] p-4 rounded-2xl transition-colors group  "
           >
             <ArrowLeft
               size={16}
