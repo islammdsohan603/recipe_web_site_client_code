@@ -9,7 +9,7 @@ const DetailsRecipe = async ({ params }) => {
   const recipedetails = await getDetailsRecipeData(id);
 
   return (
-    <div className="p-8 text-white">
+    <div className=" text-white">
       <RecipeDetailsCard recipedetails={recipedetails} />
     </div>
   );

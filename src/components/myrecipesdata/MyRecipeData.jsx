@@ -1,7 +1,10 @@
 import Image from 'next/image';
 
+import { FiEye, FiEdit3, FiTrash2 } from 'react-icons/fi';
+import ViewButton from './actionbutton/ViewButton';
+
 const MyRecipeData = ({ newrecipe }) => {
-  const { recipeName, image, category, difficulty, prepTime } = newrecipe;
+  const { _id, recipeName, image, category, difficulty, prepTime } = newrecipe;
 
   return (
     <tr className="hover:bg-[#1a110d]/30 transition-colors duration-200 group">
@@ -44,22 +47,30 @@ const MyRecipeData = ({ newrecipe }) => {
         </div>
       </td>
 
-      {/* Action Buttons */}
+      {/* Action Buttons with Icons */}
       <td className="py-4 px-6 text-right">
         <div className="flex items-center justify-end gap-2">
           {/* View Button */}
-          <button className="px-3 py-1.5 text-xs font-medium text-zinc-300 bg-zinc-900 border border-zinc-800 rounded-lg cursor-pointer hover:bg-zinc-800 transition duration-300">
-            View
-          </button>
+          <div>
+            <ViewButton id={_id} />
+          </div>
 
           {/* Update Button */}
-          <button className="px-3 py-1.5 text-xs font-medium text-orange-400 bg-orange-500/10 border border-orange-500/20 rounded-lg cursor-pointer hover:bg-orange-500/20 transition duration-300">
-            Update
+          <button
+            title="Update Recipe"
+            className="p-2 flex items-center gap-2 text-orange-400 bg-orange-500/10 border border-orange-500/20 rounded-lg cursor-pointer hover:bg-orange-500/20 hover:text-orange-300 transition duration-200"
+          >
+            <FiEdit3 size={18} />
+            update
           </button>
 
           {/* Delete Button */}
-          <button className="px-3 py-1.5 text-xs font-medium text-red-400 bg-red-500/10 border border-red-500/20 rounded-lg cursor-pointer hover:bg-red-500/20 transition duration-300">
-            Delete
+          <button
+            title="Delete Recipe"
+            className="p-2 flex items-center gap-2 text-red-400 bg-red-500/10 border border-red-500/20 rounded-lg cursor-pointer hover:bg-red-500/20 hover:text-red-300 transition duration-200"
+          >
+            <FiTrash2 size={18} />
+            delete
           </button>
         </div>
       </td>
