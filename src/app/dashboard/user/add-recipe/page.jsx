@@ -197,6 +197,7 @@ const AddNewRecipeForm = () => {
                   </label>
 
                   <input
+                    required
                     type="text"
                     name="recipeName"
                     value={recipeData.recipeName}
@@ -214,6 +215,7 @@ const AddNewRecipeForm = () => {
                     </label>
 
                     <select
+                      required
                       name="category"
                       value={recipeData.category}
                       onChange={handleChange}
@@ -235,6 +237,7 @@ const AddNewRecipeForm = () => {
                     </label>
 
                     <input
+                      required
                       type="text"
                       name="cuisineType"
                       value={recipeData.cuisineType}
@@ -276,6 +279,7 @@ const AddNewRecipeForm = () => {
                     </label>
 
                     <input
+                      required
                       type="number"
                       name="prepTime"
                       value={recipeData.prepTime}
@@ -310,6 +314,7 @@ const AddNewRecipeForm = () => {
                   {recipeData.ingredients.map((ingredient, index) => (
                     <div key={index} className="flex gap-2">
                       <input
+                        required
                         value={ingredient}
                         onChange={e =>
                           handleIngredientChange(index, e.target.value)
@@ -348,6 +353,7 @@ const AddNewRecipeForm = () => {
                   {recipeData.steps.map((step, index) => (
                     <div key={index} className="flex gap-2">
                       <textarea
+                        required
                         value={step}
                         onChange={e => handleStepChange(index, e.target.value)}
                         placeholder={`Step ${index + 1}`}
@@ -404,6 +410,7 @@ const AddNewRecipeForm = () => {
                 </p>
 
                 <input
+                  required
                   id="recipe-image"
                   type="file"
                   onChange={handleImageChange}
