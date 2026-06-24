@@ -69,3 +69,21 @@ export const getDetailsRecipeData = async (id) => {
   }
 };
 
+// get new all recipe data
+
+export const createNewRecipeData = async () => {
+  try {
+    try {
+      const res = await fetch(`${baseUrl}/api/new-recipe`, { cache: 'no-store' });
+      if (!res.ok) {
+        throw new Error('Failed to fetch data');
+      }
+      const result = await res.json();
+      return result;
+    } catch (error) {
+      console.log(error)
+    }
+  } catch (error) {
+
+  }
+}
