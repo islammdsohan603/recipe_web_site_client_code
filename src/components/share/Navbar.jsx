@@ -17,10 +17,12 @@ const Navbar = () => {
 
   const { data: session, isPending, refetch } = useSession();
   const user = session?.user;
+  const isAdmin = user?.role === 'admin';
 
   const navLinks = [
     { name: 'Home', href: '/' },
     { name: 'Browse Recipes', href: '/browse' },
+    { name: 'DashBoard', href: '/dashboard/user' },
   ];
 
   const closeMenu = () => setIsOpen(false);
@@ -180,9 +182,15 @@ const Navbar = () => {
                   <div className="h-8 w-20 rounded-xl bg-orange-200/20" />
                 </div>
               ) : user ? (
-                <div className="flex items-center gap-2">
+                <div className="flex flex-col items-center gap-2">
                   <Avatar>
-                    <Avatar.Image alt={user?.name} src={user?.image} />
+                    <Avatar.Image
+                      alt={user?.name}
+                      src={user?.image}
+                      width={40}
+                      height={40}
+                      className=" rounded-full   "
+                    />
                     <Avatar.Fallback>{user.name.charAt(0)}</Avatar.Fallback>
                   </Avatar>
 
@@ -194,7 +202,7 @@ const Navbar = () => {
                       router.push('/');
                       closeMenu();
                     }}
-                    className="bg-red-400 px-3 py-1.5 rounded-2xl cursor-pointer hover:bg-red-700 duration-500 text-white"
+                    className="bg-orange-500 px-3 py-1.5 rounded-2xl cursor-pointer w-full   hover:bg-orange-700 duration-500 text-white"
                   >
                     SignOut
                   </button>
