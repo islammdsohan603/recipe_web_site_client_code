@@ -119,7 +119,31 @@ const AddNewRecipeForm = () => {
   };
 
   const handleSubmit = async e => {
-    console.log(e);
+    e.preventDefault();
+
+    try {
+      const payload = await createNewRecipe(recipeData);
+
+      if (payload && payload.insertedId) {
+        toast.success('Successfully added recipe!');
+
+        setRecipeData({
+          recipeName: '',
+          category: '',
+          cuisineType: '',
+          difficulty: 'Beginner',
+          prepTime: '',
+          image: '',
+          ingredients: [''],
+          steps: [''],
+        });
+      } else {
+        toast.error('Failed to save recipe');
+      }
+    } catch (error) {
+      console.error('Submission Error:', error);
+      toast.error('Something went wrong!');
+    }
   };
 
   return (
