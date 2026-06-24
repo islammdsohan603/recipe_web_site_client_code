@@ -1,7 +1,7 @@
 "use server"
 
 
-const baseUrl = process.env.NEXT_PULIC_SERVER_URL;
+const baseUrl = process.env.NEXT_PUBLIC_SERVER_URL;
 
 export const createNewRecipe = async (newrecipe) => {
   if (!baseUrl) {

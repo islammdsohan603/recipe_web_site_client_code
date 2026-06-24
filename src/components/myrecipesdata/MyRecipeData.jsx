@@ -58,7 +58,7 @@ const MyRecipeData = ({ newrecipe }) => {
 
           {/* Update Button */}
           <div>
-            <UpdateButton id={_id} />
+            <UpdateButton recipe={newrecipe} />
           </div>
 
           {/* Delete Button */}
