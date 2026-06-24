@@ -1,7 +1,9 @@
 'use client';
 
+import { createNewRecipe } from '@/lib/action/newrecipe';
 import Image from 'next/image';
 import { useState } from 'react';
+import { toast } from 'react-toastify';
 
 const AddNewRecipeForm = () => {
   const categories = [
@@ -116,10 +118,8 @@ const AddNewRecipeForm = () => {
     }));
   };
 
-  const handleSubmit = e => {
-    e.preventDefault();
-
-    console.log(recipeData);
+  const handleSubmit = async e => {
+    console.log(e);
   };
 
   return (
