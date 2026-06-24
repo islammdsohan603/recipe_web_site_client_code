@@ -93,7 +93,7 @@ export const createNewRecipeData = async () => {
 export const getViewRecipeData = async (id) => {
   try {
 
-    const res = await fetch(`${baseUrl}/api/viewdetails/${id}`, {
+    const res = await fetch(`${baseUrl}/api/view-details/${id}`, {
       cache: 'no-store'
     })
 
