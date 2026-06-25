@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { FiEye, FiEdit3, FiTrash2 } from 'react-icons/fi';
 import ViewButton from './actionbutton/ViewButton';
 import UpdateButton from './actionbutton/UpdateButton';
+import DeleteButton from './actionbutton/DeleteButton';
 
 const MyRecipeData = ({ newrecipe }) => {
   const { _id, recipeName, image, category, difficulty, prepTime } = newrecipe;
@@ -62,13 +63,10 @@ const MyRecipeData = ({ newrecipe }) => {
           </div>
 
           {/* Delete Button */}
-          <button
-            title="Delete Recipe"
-            className="p-2 flex items-center gap-2 text-red-400 bg-red-500/10 border border-red-500/20 rounded-lg cursor-pointer hover:bg-red-500/20 hover:text-red-300 transition duration-200"
-          >
-            <FiTrash2 size={18} />
-            delete
-          </button>
+
+          <div>
+            <DeleteButton id={_id} />
+          </div>
         </div>
       </td>
     </tr>
