@@ -425,7 +425,7 @@ const AddNewRecipeForm = () => {
               {recipeData.image && (
                 <Image
                   src={recipeData.image}
-                  alt="preview"
+                  alt={recipeData.recipeName}
                   width={600}
                   height={400}
                   className="w-full h-52 object-cover"
