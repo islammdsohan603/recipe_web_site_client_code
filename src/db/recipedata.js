@@ -111,3 +111,26 @@ export const getViewRecipeData = async (id) => {
   }
 
 }
+
+
+// update like count api call
+
+export const updateRecipeLike = async (id, email) => {
+  try {
+    const res = await fetch(`${baseUrl}/api/recipe/like/${id}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+
+      body: JSON.stringify({ email })
+    })
+
+
+    return await res.json()
+
+  } catch (error) {
+    console.log("Error updating like count", error);
+  }
+}
+
