@@ -13,6 +13,7 @@ import {
   Star,
 } from 'lucide-react';
 import Link from 'next/link';
+import LikeButtton from './actionbutton/LikeButtton';
 
 const RecipeDetailsCard = ({ recipedetails }) => {
   const {
@@ -116,6 +117,12 @@ const RecipeDetailsCard = ({ recipedetails }) => {
             </div>
 
             {/* Buttons */}
+
+            <div className="flex items-center gap-6">
+              <div>
+                <LikeButtton recipe={recipedetails} />
+              </div>
+            </div>
 
             {/* Author */}
             <div className="mt-10 border-t border-white/10 pt-6">
