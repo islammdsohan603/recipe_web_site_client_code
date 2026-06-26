@@ -136,14 +136,32 @@ export const updateRecipeLike = async (id, email) => {
 
 
 // my recipe api call
-
-export const MyRecipeApi = async () => {
+export const MyRecipeApi = async (email) => { //  
   try {
-    const res = await fetch(`${baseUrl}/api/my-recipe`, { cache: 'no-store' })
-
+    const res = await fetch(`${baseUrl}/api/my-recipe?email=${email}`, { cache: 'no-store' })
     return await res.json()
-
   } catch (error) {
-    console.log(error)
+    console.log(error);
+    return [];
   }
 }
+
+
+// like count api dashboard
+
+
+export const getUserLikedCount = async (email) => {
+  try {
+    const res = await fetch(`${baseUrl}/api/user-liked-count?email=${email}`, {
+      cache: 'no-store'
+    });
+    if (!res.ok) throw new Error("Failed to fetch liked count");
+
+    const data = await res.json();
+
+    return data.count || 0;
+  } catch (error) {
+    console.error(error);
+    return 0;
+  }
+};

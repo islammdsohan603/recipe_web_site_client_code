@@ -6,10 +6,8 @@ import { useState } from 'react';
 import { updateRecipeLike } from '@/db/recipedata';
 import { toast } from 'react-toastify';
 
-const LikeButtton = ({ recipe }) => {
+const LikeButtton = ({ recipe, userEmail }) => {
   const { _id, likesCount: initialLikes, likedBy = [] } = recipe || {};
-
-  const userEmail = 'user@example.com';
 
   const [likes, setLikes] = useState(initialLikes || 0);
   const [isLiking, setIsLiking] = useState(false);

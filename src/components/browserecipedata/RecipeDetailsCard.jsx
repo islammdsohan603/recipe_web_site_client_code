@@ -14,6 +14,7 @@ import {
 } from 'lucide-react';
 import Link from 'next/link';
 import LikeButtton from './actionbutton/LikeButtton';
+import { useSession } from '@/lib/auth-client';
 
 const RecipeDetailsCard = ({ recipedetails }) => {
   const {
@@ -30,6 +31,8 @@ const RecipeDetailsCard = ({ recipedetails }) => {
     authorEmail,
     likesCount,
   } = recipedetails || {};
+
+  const { data: session } = useSession();
 
   return (
     <section className="bg-[#0c0604] min-h-screen py-16">
@@ -120,7 +123,10 @@ const RecipeDetailsCard = ({ recipedetails }) => {
 
             <div className="flex items-center gap-6">
               <div>
-                <LikeButtton recipe={recipedetails} />
+                <LikeButtton
+                  recipe={recipedetails}
+                  userEmail={session?.user?.email}
+                />
               </div>
             </div>
 
