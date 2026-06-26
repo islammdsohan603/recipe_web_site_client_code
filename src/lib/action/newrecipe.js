@@ -16,3 +16,23 @@ export const createNewRecipe = async (newrecipe) => {
 
   return res.json();
 }
+
+
+// recports api
+
+
+export const reportRecipeApi = async (reportData) => {
+  try {
+    const res = await fetch(`${baseUrl}/api/recipe/report`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(reportData)
+    });
+    return await res.json();
+  } catch (error) {
+    console.log("Error submitting report:", error);
+    return { success: false, message: "Failed to connect to server" };
+  }
+};
