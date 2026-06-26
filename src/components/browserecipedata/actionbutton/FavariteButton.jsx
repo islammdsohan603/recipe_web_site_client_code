@@ -9,9 +9,6 @@ import { toast } from 'react-toastify';
 const FavariteButton = ({ recipe, userEmail }) => {
   const { _id, favoritedBy = [] } = recipe || {};
 
-  // এখানে ইমেইলটি ঠিকঠাক আসছে কিনা তা দেখতে একটি console.log দিন
-  console.log('Logged in user email inside button:', userEmail);
-
   const [isFavorited, setIsFavorited] = useState(
     favoritedBy.includes(userEmail),
   );
@@ -20,7 +17,6 @@ const FavariteButton = ({ recipe, userEmail }) => {
   const handleFavorite = async () => {
     if (isLoading || !_id) return;
 
-    // যদি userEmail না পায় তবেই এই এররটি আসে
     if (!userEmail) {
       toast.error('Please login to add to favorites');
       return;
@@ -29,7 +25,7 @@ const FavariteButton = ({ recipe, userEmail }) => {
     setIsLoading(true);
 
     setIsLoading(true);
-    // Optimistic UI Update (আগেভাগেই স্টেট বদলে দেওয়া)
+
     setIsFavorited(!isFavorited);
 
     const result = await updateRecipeFavorite(_id, userEmail);
@@ -38,7 +34,6 @@ const FavariteButton = ({ recipe, userEmail }) => {
       setIsFavorited(result.isFavorited);
       toast.success(result.message);
     } else {
-      // ফেইল করলে আগের অবস্থায় ফেরত যাবে
       setIsFavorited(isFavorited);
       toast.error('Something went wrong');
     }
