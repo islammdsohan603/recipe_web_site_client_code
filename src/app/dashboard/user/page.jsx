@@ -3,6 +3,7 @@ import { auth } from '@/lib/auth';
 import { headers } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { BookOpen, Heart, ThumbsUp } from 'lucide-react';
+import Link from 'next/link';
 
 const UserDashboard = async () => {
   const session = await auth.api.getSession({
@@ -21,8 +22,6 @@ const UserDashboard = async () => {
   ]);
 
   const myRecipes = fetchedRecipes || [];
-
-  console.log(myRecipes);
 
   return (
     <div className="bg-[#0a0504] text-white min-h-screen p-6 md:p-12 font-sans">
@@ -68,8 +67,9 @@ const UserDashboard = async () => {
                 Total Favorites
               </h2>
               <p className="text-4xl font-semibold font-mono tracking-tight text-zinc-100">
-                1.2k
+                1.2K
               </p>
+              <Link>deteails</Link>
             </div>
           </div>
 

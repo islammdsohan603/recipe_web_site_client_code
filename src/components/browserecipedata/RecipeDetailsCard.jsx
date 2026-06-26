@@ -15,6 +15,7 @@ import {
 import Link from 'next/link';
 import LikeButtton from './actionbutton/LikeButtton';
 import { useSession } from '@/lib/auth-client';
+import FavariteButton from './actionbutton/FavariteButton';
 
 const RecipeDetailsCard = ({ recipedetails }) => {
   const {
@@ -122,11 +123,18 @@ const RecipeDetailsCard = ({ recipedetails }) => {
             {/* Buttons */}
 
             <div className="flex items-center gap-6">
+              {/* like count */}
               <div>
                 <LikeButtton
                   recipe={recipedetails}
                   userEmail={session?.user?.email}
                 />
+              </div>
+
+              {/*Favorite Button*/}
+
+              <div>
+                <FavariteButton recipe={recipedetails} />
               </div>
             </div>
 

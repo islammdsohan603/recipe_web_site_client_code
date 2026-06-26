@@ -165,3 +165,16 @@ export const getUserLikedCount = async (email) => {
     return 0;
   }
 };
+
+// favorites api
+
+export const getUserFavorites = async (email) => {
+  try {
+    const res = await fetch(`${baseUrl}/api/user-favorites?email=${email}`, { cache: 'no-store' });
+    if (!res.ok) throw new Error("Failed to fetch favorites");
+    return await res.json();
+  } catch (error) {
+    console.error(error);
+    return [];
+  }
+};
