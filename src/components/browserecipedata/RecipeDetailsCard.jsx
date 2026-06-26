@@ -16,6 +16,7 @@ import Link from 'next/link';
 import LikeButtton from './actionbutton/LikeButtton';
 import { useSession } from '@/lib/auth-client';
 import FavariteButton from './actionbutton/FavariteButton';
+import ReportButton from './actionbutton/ReportButton';
 
 const RecipeDetailsCard = ({ recipedetails }) => {
   const {
@@ -135,6 +136,15 @@ const RecipeDetailsCard = ({ recipedetails }) => {
 
               <div>
                 <FavariteButton
+                  recipe={recipedetails}
+                  userEmail={session?.user?.email}
+                />
+              </div>
+
+              {/* reports button */}
+
+              <div>
+                <ReportButton
                   recipe={recipedetails}
                   userEmail={session?.user?.email}
                 />
