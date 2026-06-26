@@ -134,7 +134,10 @@ const RecipeDetailsCard = ({ recipedetails }) => {
               {/*Favorite Button*/}
 
               <div>
-                <FavariteButton recipe={recipedetails} />
+                <FavariteButton
+                  recipe={recipedetails}
+                  userEmail={session?.user?.email}
+                />
               </div>
             </div>
 
