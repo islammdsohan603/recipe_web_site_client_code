@@ -1,5 +1,7 @@
 "use server"
 
+import { auth } from '@/lib/auth';
+import { headers } from 'next/headers';
 
 const baseUrl = process.env.NEXT_PUBLIC_SERVER_URL;
 
@@ -8,10 +10,21 @@ export const createNewRecipe = async (newrecipe) => {
     throw new Error("Base URL is not defined. Please check your environment variables.");
   }
 
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
+
+  if (!session?.user?.email) {
+    throw new Error("You must be logged in to add a recipe.");
+  }
+
   const res = await fetch(`${baseUrl}/api/recipe`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(newrecipe)
+    body: JSON.stringify({
+      ...newrecipe,
+      email: session.user.email,
+    }),
   });
 
   return res.json();

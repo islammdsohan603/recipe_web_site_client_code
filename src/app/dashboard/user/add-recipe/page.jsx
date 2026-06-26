@@ -2,10 +2,13 @@
 
 import { createNewRecipe } from '@/lib/action/newrecipe';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
 
 const AddNewRecipeForm = () => {
+  const router = useRouter();
+
   const categories = [
     'Breakfast',
     'Lunch',
@@ -126,6 +129,7 @@ const AddNewRecipeForm = () => {
 
       if (payload && payload.insertedId) {
         toast.success('Successfully added recipe!');
+        router.refresh();
 
         setRecipeData({
           recipeName: '',

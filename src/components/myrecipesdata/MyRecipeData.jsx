@@ -15,10 +15,7 @@ const MyRecipeData = ({ newrecipe }) => {
         <div className="flex items-center gap-4">
           <div className="relative w-16 h-12 flex-shrink-0 overflow-hidden rounded-lg border border-orange-900/20">
             <Image
-              src={
-                image ||
-                'https://images.unsplash.com/photo-1495521821757-a1efb6729352?w=150'
-              }
+              src={image}
               alt={recipeName}
               fill
               className="object-cover group-hover:scale-105 duration-300"

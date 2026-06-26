@@ -136,12 +136,17 @@ export const updateRecipeLike = async (id, email) => {
 
 
 // my recipe api call
-export const MyRecipeApi = async (email) => { //  
+export const MyRecipeApi = async (email) => {
   try {
-    const res = await fetch(`${baseUrl}/api/my-recipe?email=${email}`, { cache: 'no-store' })
-    return await res.json()
+
+    const res = await fetch(`${baseUrl}/api/my-recipe?email=${encodeURIComponent(email)}`, {
+      cache: 'no-store'
+    });
+
+    if (!res.ok) return [];
+    return await res.json();
   } catch (error) {
-    console.log(error);
+    console.log("Error fetching my recipes:", error);
     return [];
   }
 }

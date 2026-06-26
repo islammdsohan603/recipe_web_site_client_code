@@ -12,19 +12,19 @@ const nextConfig = {
         hostname: 'images.unsplash.com',
         pathname: '/**',
       },
-      // মূল ImgBB ডোমেন
+
       {
         protocol: 'https',
         hostname: 'i.ibb.co',
         pathname: '/**',
       },
-      // নতুন ImgBB ডোমেন (অনেক সময় এই লিঙ্কে ছবি আপলোড হয়)
+
       {
         protocol: 'https',
-        hostname: 'i.ibb.co.com',
+        hostname: 'i.ibb.co',
         pathname: '/**',
       },
-      // সাধারণ ImgBB লিঙ্ক সেফটি
+
       {
         protocol: 'https',
         hostname: 'ibb.co',
