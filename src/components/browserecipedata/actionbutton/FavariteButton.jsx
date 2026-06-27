@@ -28,7 +28,7 @@ const FavariteButton = ({ recipe, userEmail }) => {
 
     setIsFavorited(!isFavorited);
 
-    const result = await updateRecipeFavorite(_id, userEmail);
+    const result = await updateRecipeFavorite(_id, userEmail, recipe);
 
     if (result && result.success) {
       setIsFavorited(result.isFavorited);

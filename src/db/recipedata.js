@@ -186,19 +186,15 @@ export const getUserFavorites = async (email) => {
 
 // single favorites api call
 
-export const updateRecipeFavorite = async (id, email) => {
-  try {
-    const res = await fetch(`${baseUrl}/api/recipe/favorite/${id}`, {
-      method: 'PATCH',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email })
-    });
-    return await res.json();
-  } catch (error) {
-    console.log("Error updating favorite status", error);
-  }
+export const updateRecipeFavorite = async (id, email, recipeData) => {
+  const baseUrl = process.env.NEXT_PUBLIC_SERVER_URL;
+  const res = await fetch(`${baseUrl}/api/recipe/favorite/${id}`, {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email, recipeData }) // recipeData পাঠানো জরুরি
+  });
+  return await res.json();
 };
-
 
 
 
