@@ -17,6 +17,7 @@ import LikeButtton from './actionbutton/LikeButtton';
 import { useSession } from '@/lib/auth-client';
 import FavariteButton from './actionbutton/FavariteButton';
 import ReportButton from './actionbutton/ReportButton';
+import PurchaseButton from './actionbutton/PurchaseButton';
 
 const RecipeDetailsCard = ({ recipedetails }) => {
   const {
@@ -123,7 +124,7 @@ const RecipeDetailsCard = ({ recipedetails }) => {
 
             {/* Buttons */}
 
-            <div className="flex items-center gap-6">
+            <div className="flex flex-col md:flex-row items-center gap-6">
               {/* like count */}
               <div>
                 <LikeButtton
@@ -146,6 +147,14 @@ const RecipeDetailsCard = ({ recipedetails }) => {
               <div>
                 <ReportButton
                   recipe={recipedetails}
+                  userEmail={session?.user?.email}
+                />
+              </div>
+
+              {/* purchase button */}
+              <div>
+                <PurchaseButton
+                  purchrecipe={recipedetails}
                   userEmail={session?.user?.email}
                 />
               </div>

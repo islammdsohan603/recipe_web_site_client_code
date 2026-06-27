@@ -4,6 +4,7 @@ import { auth } from '@/lib/auth';
 import { headers } from 'next/headers';
 
 const baseUrl = process.env.NEXT_PUBLIC_SERVER_URL;
+console.log("Checking Base URL in Server Action:", baseUrl)
 
 export const createNewRecipe = async (newrecipe) => {
   if (!baseUrl) {
@@ -49,3 +50,10 @@ export const reportRecipeApi = async (reportData) => {
     return { success: false, message: "Failed to connect to server" };
   }
 };
+
+
+
+
+
+
+
