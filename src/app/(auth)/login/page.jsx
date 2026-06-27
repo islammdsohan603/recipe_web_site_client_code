@@ -7,6 +7,7 @@ import { toast } from 'react-toastify';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { MdEmail } from 'react-icons/md';
 import { authClient } from '@/lib/auth-client';
+import SocialButtons from '@/components/share/SocialButtons';
 
 const LoginPage = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -144,7 +145,7 @@ const LoginPage = () => {
 
             <button
               type="submit"
-              className="w-full rounded-xl bg-[#ff6d33] py-3 font-semibold text-white shadow-[0_0_30px_rgba(255,109,51,.25)] transition-all duration-300 hover:scale-[1.02] hover:bg-[#ff5a1f]"
+              className="w-full rounded-xl bg-[#ff6d33] py-3 font-semibold text-white shadow-[0_0_30px_rgba(255,109,51,.25)] transition-all cursor-pointer duration-300 hover:scale-[1.02] hover:bg-[#ff5a1f]"
             >
               Sign In
             </button>
@@ -158,6 +159,12 @@ const LoginPage = () => {
             >
               Register
             </Link>
+          </div>
+
+          <div className="w-[95%] h-0.5 bg-gray-500 my-2"></div>
+
+          <div>
+            <SocialButtons />
           </div>
         </div>
       </div>
