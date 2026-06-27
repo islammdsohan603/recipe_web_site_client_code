@@ -1,14 +1,54 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { CheckCircle2, ShoppingBag } from 'lucide-react';
 import Link from 'next/link';
+import { useSession } from '@/lib/auth-client';
 
 const PymantSuccess = () => {
   const searchParams = useSearchParams();
   const sessionId = searchParams.get('session_id');
   const recipeId = searchParams.get('recipeId');
+
+  const { data: session } = useSession();
+  const userEmail = session?.user?.email;
+
+  const [isSaving, setIsSaving] = useState(true);
+
+  const baseUrl = process.env.NEXT_PUBLIC_SERVER_URL;
+
+  useEffect(() => {
+    const savePaymentToDb = async () => {
+      if (!sessionId || !recipeId || !userEmail) return;
+
+      try {
+        const res = await fetch(`${baseUrl}/api/save-payment`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            sessionId,
+            recipeId,
+            userEmail,
+            recipeName: 'Premium Recipe',
+            price: 4.99,
+          }),
+        });
+
+        if (res.ok) {
+          console.log('Payment saved to database successfully!');
+        }
+      } catch (error) {
+        console.error('Failed to save payment to DB:', error);
+      } finally {
+        setIsSaving(false);
+      }
+    };
+
+    savePaymentToDb();
+  }, [sessionId, recipeId, userEmail]);
 
   return (
     <div className="min-h-screen bg-[#0a0504] flex items-center justify-center p-6 text-white font-sans">
@@ -24,8 +64,9 @@ const PymantSuccess = () => {
             Payment Successful!
           </h1>
           <p className="text-sm text-zinc-400">
-            Thank you for your purchase. Your payment has been processed
-            securely.
+            {isSaving
+              ? 'Saving your purchase to dashboard...'
+              : 'Thank you for your purchase. Your payment has been processed securely.'}
           </p>
         </div>
 
