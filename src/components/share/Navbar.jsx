@@ -86,16 +86,18 @@ const Navbar = () => {
               </div>
             ) : user ? (
               <div className="hidden md:flex items-center gap-2">
-                <Avatar>
-                  <Avatar.Image
-                    alt={user?.name}
-                    src={user?.image}
-                    width={40}
-                    height={40}
-                    className=" rounded-full object-cover cursor-pointer"
-                  />
-                  <Avatar.Fallback>{user.name.charAt(0)}</Avatar.Fallback>
-                </Avatar>
+                <Link href={'/dashboard/user/profile'}>
+                  <Avatar>
+                    <Avatar.Image
+                      alt={user?.name}
+                      src={user?.image}
+                      width={40}
+                      height={40}
+                      className=" rounded-full object-cover cursor-pointer"
+                    />
+                    <Avatar.Fallback>{user.name.charAt(0)}</Avatar.Fallback>
+                  </Avatar>
+                </Link>
 
                 <button
                   onClick={handleSignOut}
