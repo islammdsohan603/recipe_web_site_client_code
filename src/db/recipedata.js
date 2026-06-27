@@ -175,11 +175,16 @@ export const getUserLikedCount = async (email) => {
 
 export const getUserFavorites = async (email) => {
   try {
-    const res = await fetch(`${baseUrl}/api/user-favorites?email=${email}`, { cache: 'no-store' });
+
+    const res = await fetch(`${baseUrl}/api/my-favorites?email=${email}`, {
+      cache: 'no-store'
+    });
+
     if (!res.ok) throw new Error("Failed to fetch favorites");
+
     return await res.json();
   } catch (error) {
-    console.error(error);
+    console.error("Error fetching favorites:", error);
     return [];
   }
 };
@@ -191,7 +196,7 @@ export const updateRecipeFavorite = async (id, email, recipeData) => {
   const res = await fetch(`${baseUrl}/api/recipe/favorite/${id}`, {
     method: 'PATCH',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ email, recipeData }) // recipeData পাঠানো জরুরি
+    body: JSON.stringify({ email, recipeData })
   });
   return await res.json();
 };
