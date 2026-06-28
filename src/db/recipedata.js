@@ -22,17 +22,20 @@ export const getPopularData = async () => {
 
 export const getFeaturedData = async () => {
   try {
-    const res = await fetch(`${baseUrl}/api/featured-recipe`, { cache: 'no-store' });
-    if (!res.ok) {
-      throw new Error('Failed to fetch data');
-    }
-    const result = await res.json();
-    return result;
-  } catch (error) {
-    console.log(error)
-  }
-}
+    const res = await fetch(`${baseUrl}/api/featured-recipe`, {
+      cache: 'no-store',
+    });
 
+    if (!res.ok) throw new Error('Failed to fetch data');
+
+    const result = await res.json();
+
+    return Array.isArray(result) ? result : result.data || [];
+  } catch (error) {
+    console.error('getFeaturedData error:', error);
+    return [];
+  }
+};
 
 //get all and fillter recipe api
 
@@ -71,20 +74,22 @@ export const getDetailsRecipeData = async (id) => {
 
 export const createNewRecipeData = async () => {
   try {
-    try {
-      const res = await fetch(`${baseUrl}/api/new-recipe`, { cache: 'no-store' });
-      if (!res.ok) {
-        throw new Error('Failed to fetch data');
-      }
-      const result = await res.json();
-      return result;
-    } catch (error) {
-      console.log(error)
-    }
-  } catch (error) {
+    const res = await fetch(`${baseUrl}/api/new-recipe`, {
+      cache: 'no-store',
+    });
 
+    if (!res.ok) {
+      throw new Error('Failed to fetch data');
+    }
+
+    const result = await res.json();
+
+    return Array.isArray(result) ? result : [];
+  } catch (error) {
+    console.error('Error fetching new recipes:', error);
+    return [];
   }
-}
+};
 
 // get view recipe data
 

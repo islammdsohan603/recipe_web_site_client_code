@@ -45,14 +45,12 @@ const FeaturedGrid = ({ featuredData }) => {
           initial="hidden"
           animate="visible"
         >
-          {featuredData && featuredData.length > 0 ? (
+          {featuredData?.length > 0 ? (
             featuredData.map(recipe => (
               <FeaturedCard key={recipe._id} recipe={recipe} />
             ))
           ) : (
-            <div className="text-neutral-500 italic text-sm">
-              No featured creations found.
-            </div>
+            <div>No featured creations found.</div>
           )}
         </motion.div>
       </div>

@@ -3,11 +3,11 @@ import React from 'react';
 import FeaturedGrid from './FeaturedGrid';
 
 const FeatiredSection = async () => {
-  const featuredData = await getFeaturedData();
+  const featuredData = (await getFeaturedData()) || [];
 
   return (
     <div>
-      <FeaturedGrid key={featuredData._id} featuredData={featuredData} />
+      <FeaturedGrid featuredData={featuredData} />
     </div>
   );
 };

@@ -1,9 +1,11 @@
+export const dynamic = 'force-dynamic';
+
 import MyRecipeData from '@/components/myrecipesdata/MyRecipeData';
 import { createNewRecipeData } from '@/db/recipedata';
 import React from 'react';
 
 const MyRecipepage = async () => {
-  const data = await createNewRecipeData();
+  const data = (await createNewRecipeData()) ?? [];
 
   return (
     <div className="min-h-screen bg-black text-white p-6 md:p-10">
@@ -32,14 +34,14 @@ const MyRecipepage = async () => {
 
             {/* Table Body */}
             <tbody className="divide-y divide-zinc-900">
-              {data.map(newrecipe => (
+              {data?.map(newrecipe => (
                 <MyRecipeData key={newrecipe._id} newrecipe={newrecipe} />
               ))}
             </tbody>
           </table>
 
           {/* Empty State Handler */}
-          {data.length === 0 && (
+          {data?.length === 0 && (
             <div className="text-center py-12 text-zinc-500">
               No recipes found. Start creating one!
             </div>

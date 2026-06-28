@@ -1,13 +1,14 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { Suspense, useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { CheckCircle2, ShoppingBag } from 'lucide-react';
 import Link from 'next/link';
 import { useSession } from '@/lib/auth-client';
 
-const PymantSuccess = () => {
+function PaymentSuccessContent() {
   const searchParams = useSearchParams();
+
   const sessionId = searchParams.get('session_id');
   const recipeId = searchParams.get('recipeId');
 
@@ -48,7 +49,7 @@ const PymantSuccess = () => {
     };
 
     savePaymentToDb();
-  }, [sessionId, recipeId, userEmail]);
+  }, [sessionId, recipeId, userEmail, baseUrl]);
 
   return (
     <div className="min-h-screen bg-[#0a0504] flex items-center justify-center p-6 text-white font-sans">
@@ -63,6 +64,7 @@ const PymantSuccess = () => {
           <h1 className="text-3xl font-bold font-serif text-zinc-100">
             Payment Successful!
           </h1>
+
           <p className="text-sm text-zinc-400">
             {isSaving
               ? 'Saving your purchase to dashboard...'
@@ -75,6 +77,7 @@ const PymantSuccess = () => {
             <p className="text-[11px] text-zinc-500 font-mono uppercase tracking-wider">
               Payment ID
             </p>
+
             <p className="text-xs text-zinc-300 font-mono truncate mt-0.5">
               {sessionId}
             </p>
@@ -83,12 +86,13 @@ const PymantSuccess = () => {
 
         <div className="flex flex-col sm:flex-row gap-3 pt-2">
           <Link
-            href={`/dashboard/user/purchased`}
+            href="/dashboard/user/purchased"
             className="flex-1 bg-green-600 hover:bg-green-500 text-white py-3 px-4 rounded-xl font-medium transition-all duration-300 flex items-center justify-center gap-2 text-sm"
           >
             <ShoppingBag size={16} />
             View My Recipes
           </Link>
+
           <Link
             href="/browse"
             className="flex-1 bg-zinc-800 hover:bg-zinc-700 text-zinc-300 py-3 px-4 rounded-xl font-medium transition-all duration-300 text-sm flex items-center justify-center"
@@ -99,6 +103,18 @@ const PymantSuccess = () => {
       </div>
     </div>
   );
-};
+}
 
-export default PymantSuccess;
+export default function PaymentSuccess() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen flex items-center justify-center">
+          Loading...
+        </div>
+      }
+    >
+      <PaymentSuccessContent />
+    </Suspense>
+  );
+}
