@@ -8,6 +8,7 @@ import { Menu, X, Utensils } from 'lucide-react';
 import { authClient, useSession } from '@/lib/auth-client';
 import { Avatar } from '@heroui/react';
 import { toast } from 'react-toastify';
+import Image from 'next/image';
 
 const Navbar = () => {
   const pathname = usePathname();
@@ -18,6 +19,7 @@ const Navbar = () => {
   const { data: session, isPending, refetch } = useSession();
   const user = session?.user;
   const isAdmin = user?.role === 'admin';
+  console.log(user?.image);
 
   const navLinks = [
     { name: 'Home', href: '/' },
@@ -87,16 +89,13 @@ const Navbar = () => {
             ) : user ? (
               <div className="hidden md:flex items-center gap-2">
                 <Link href={'/dashboard/user/profile'}>
-                  <Avatar>
-                    <Avatar.Image
-                      alt={user?.name}
-                      src={user?.image}
-                      width={40}
-                      height={40}
-                      className=" rounded-full object-cover cursor-pointer"
-                    />
-                    <Avatar.Fallback>{user.name.charAt(0)}</Avatar.Fallback>
-                  </Avatar>
+                  <Image
+                    src={user?.image}
+                    alt={user?.name}
+                    width={40}
+                    height={40}
+                    className=" object-cover rounded-full"
+                  />
                 </Link>
 
                 <button
