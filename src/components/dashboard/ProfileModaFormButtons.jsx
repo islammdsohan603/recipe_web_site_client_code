@@ -29,8 +29,10 @@ const ProfileModaFormButtons = () => {
       return;
     }
 
+    const baseUrl = process.env.NEXT_PUBLIC_SERVER_URL;
+
     try {
-      const response = await fetch(`http://localhost:5000/api/users`, {
+      const response = await fetch(`${baseUrl}/api/users`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
