@@ -55,9 +55,7 @@ export const getAllRecipeData = async (category = '', page = 1) => {
 // get single data for details page
 export const getDetailsRecipeData = async (id) => {
   try {
-    const res = await fetch(`${baseUrl}/api/details/${id}`, {
-      cache: 'no-store'
-    });
+    const res = await fetch(`${baseUrl}/api/details/${id}`);
     if (!res.ok) {
       throw new Error("Failed to fetch recipe details");
     }

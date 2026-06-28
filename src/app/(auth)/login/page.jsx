@@ -23,7 +23,6 @@ const LoginPage = () => {
     const passwordValue = users.password;
     const emailValue = users.email;
 
-    // পাসওয়ার্ড ভ্যালিডেশন
     if (passwordValue.length < 6)
       return setError('Password must be at least 6 characters.');
     if (!/[A-Z]/.test(passwordValue))
