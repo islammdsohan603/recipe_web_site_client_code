@@ -44,9 +44,23 @@ export default function SignupPage() {
       image: users.image,
     });
 
+    const baseUrl = process.env.NEXT_PUBLIC_SERVER_URL;
+
     if (data) {
       try {
         toast.success('Account successfully created.');
+
+        await fetch(`${baseUrl}/api/send-email`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            name: users.name,
+            email: users.email,
+          }),
+        });
+
         router.refresh();
         router.push('/login');
       } catch (err) {
