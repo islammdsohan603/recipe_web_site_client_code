@@ -31,7 +31,7 @@ const Footer = () => {
   return (
     <footer
       id="contact"
-      className="border-t border-white/10 bg-[#090403] text-[#f5dec9]"
+      className="border-t border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-[#090403] text-slate-800 dark:text-[#f5dec9]"
     >
       <div className="mx-auto w-11/12 max-w-7xl py-12 sm:py-14 lg:py-16">
         <div className="grid gap-10 md:grid-cols-[1.2fr_0.8fr_1fr] lg:gap-14">
@@ -40,10 +40,10 @@ const Footer = () => {
               <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-orange-500 shadow-[0_0_24px_rgba(249,115,22,0.25)]">
                 <Utensils size={21} className="text-white" />
               </span>
-              <span className="text-2xl font-bold text-white">RecipeHub</span>
+              <span className="text-2xl font-bold text-slate-900 dark:text-white">RecipeHub</span>
             </Link>
 
-            <p className="mt-5 max-w-md text-sm leading-7 text-[#cdb7aa] sm:text-base">
+            <p className="mt-5 max-w-md text-sm leading-7 text-slate-600 dark:text-[#cdb7aa] sm:text-base">
               A refined culinary destination for home cooks who want chef-led
               guidance, seasonal inspiration, and a polished cooking community.
             </p>
@@ -56,7 +56,7 @@ const Footer = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
-                  className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/[0.03] text-[#f5dec9]/80 transition hover:border-orange-500/50 hover:bg-orange-500/10 hover:text-white"
+                  className="flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 dark:border-white/10 bg-slate-100 dark:bg-white/[0.03] text-slate-600 dark:text-[#f5dec9]/80 transition hover:border-orange-500/50 hover:bg-orange-500/10 hover:text-orange-600 dark:hover:text-white"
                 >
                   <Icon size={18} />
                 </Link>
@@ -74,7 +74,7 @@ const Footer = () => {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="w-fit text-sm text-[#cdb7aa] transition hover:text-white"
+                  className="w-fit text-sm text-slate-600 dark:text-[#cdb7aa] transition hover:text-orange-600 dark:hover:text-white"
                 >
                   {link.name}
                 </Link>
@@ -93,7 +93,7 @@ const Footer = () => {
                   <span className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-orange-500/10 text-orange-400">
                     <Icon size={17} />
                   </span>
-                  <span className="break-words text-sm leading-6 text-[#cdb7aa]">
+                  <span className="break-words text-sm leading-6 text-slate-600 dark:text-[#cdb7aa]">
                     {label}
                   </span>
                 </div>
@@ -102,7 +102,7 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="mt-10 flex flex-col gap-3 border-t border-white/10 pt-6 text-sm text-[#cdb7aa] sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-10 flex flex-col gap-3 border-t border-slate-200 dark:border-white/10 pt-6 text-sm text-slate-500 dark:text-[#cdb7aa] sm:flex-row sm:items-center sm:justify-between">
           <p>Copyright 2026 RecipeHub. All rights reserved.</p>
           <p>Crafted for modern culinary experiences.</p>
         </div>

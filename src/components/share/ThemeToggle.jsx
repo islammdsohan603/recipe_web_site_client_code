@@ -1,29 +1,33 @@
 'use client';
 
+import React from 'react';
 import { useTheme } from 'next-themes';
-import { Moon, Sun } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { MdOutlineDarkMode } from 'react-icons/md';
+import { CiLight } from 'react-icons/ci';
 
-export default function ThemeToggle() {
-  const [mounted, setMounted] = useState(false);
-  const { theme, setTheme } = useTheme();
+const Toggling = () => {
+  const { theme, setTheme, resolvedTheme } = useTheme();
+  const [mounted, setMounted] = React.useState(false);
 
-  // useEffect only runs on the client, so now we can safely show the UI
-  useEffect(() => {
+  React.useEffect(() => {
     setMounted(true);
   }, []);
 
   if (!mounted) {
-    return <div className="w-8 h-8" />;
+    return <div className="w-6 h-6"></div>;
   }
 
+  const isDarkMode = resolvedTheme === 'dark';
+
   return (
-    <button
-      onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-      className="p-2 rounded-full transition-colors hover:bg-zinc-200 dark:hover:bg-zinc-800 text-zinc-800 dark:text-zinc-200"
+    <button 
+      onClick={() => setTheme(isDarkMode ? 'light' : 'dark')} 
+      className="text-2xl cursor-pointer hover:opacity-80 transition-opacity"
       aria-label="Toggle Theme"
     >
-      {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
+      {isDarkMode ? <CiLight /> : <MdOutlineDarkMode />}
     </button>
   );
-}
+};
+
+export default Toggling;

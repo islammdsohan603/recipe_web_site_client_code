@@ -43,12 +43,12 @@ const Navbar = () => {
   };
 
   return (
-    <header className="sticky top-0 z-50 bg-[#1a0f0c] border-b border-orange-950/20">
+    <header className="sticky top-0 z-50 bg-white dark:bg-[#1a0f0c] border-b border-orange-100 dark:border-orange-950/20">
       <nav className="relative">
         {/* Container */}
         <div className="w-11/12 max-w-7xl mx-auto h-20 flex items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-3 text-[#f5dec9]">
+          <Link href="/" className="flex items-center gap-3 text-slate-800 dark:text-[#f5dec9]">
             <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-orange-500">
               <Utensils size={20} className="text-white" />
             </div>
@@ -66,8 +66,8 @@ const Navbar = () => {
                   href={link.href}
                   className={`relative py-2 transition-colors duration-300 ${
                     isActive
-                      ? 'text-white font-semibold'
-                      : 'text-[#f5dec9]/70 hover:text-white'
+                      ? 'text-orange-600 dark:text-white font-semibold'
+                      : 'text-slate-600 dark:text-[#f5dec9]/70 hover:text-orange-600 dark:hover:text-white'
                   }`}
                 >
                   {link.name}
@@ -116,7 +116,7 @@ const Navbar = () => {
               <div className="hidden md:flex items-center gap-4">
                 <Link
                   href="/login"
-                  className="text-[#f5dec9]/80 hover:text-white transition"
+                  className="text-slate-600 dark:text-[#f5dec9]/80 hover:text-orange-600 dark:hover:text-white transition"
                 >
                   Login
                 </Link>
@@ -134,7 +134,7 @@ const Navbar = () => {
           {/* Mobile Button */}
           <button
             onClick={() => setIsOpen(prev => !prev)}
-            className="md:hidden text-[#f5dec9]"
+            className="md:hidden text-slate-800 dark:text-[#f5dec9]"
             aria-label="Toggle Menu"
           >
             {isOpen ? (
@@ -155,7 +155,7 @@ const Navbar = () => {
 
         {/* Mobile Menu */}
         <div
-          className={`md:hidden absolute top-full left-0 w-full bg-[#110703] border-t border-orange-950/30 shadow-xl transition-all duration-300 ${
+          className={`md:hidden absolute top-full left-0 w-full bg-white dark:bg-[#110703] border-t border-orange-100 dark:border-orange-950/30 shadow-xl transition-all duration-300 ${
             isOpen
               ? 'opacity-100 visible translate-y-0'
               : 'opacity-0 invisible -translate-y-2'
@@ -173,8 +173,8 @@ const Navbar = () => {
                   onClick={closeMenu}
                   className={`block rounded-xl px-4 py-3 transition ${
                     isActive
-                      ? 'bg-orange-500/15 text-white border border-orange-500/30'
-                      : 'text-[#f5dec9] hover:bg-white/5'
+                      ? 'bg-orange-100 dark:bg-orange-500/15 text-orange-700 dark:text-white border border-orange-200 dark:border-orange-500/30'
+                      : 'text-slate-700 dark:text-[#f5dec9] hover:bg-slate-50 dark:hover:bg-white/5'
                   }`}
                 >
                   {link.name}
@@ -183,7 +183,7 @@ const Navbar = () => {
             })}
 
             {/* Auth Mobile */}
-            <div className="pt-4 mt-4 border-t border-orange-950/30 space-y-3">
+            <div className="pt-4 mt-4 border-t border-orange-100 dark:border-orange-950/30 space-y-3">
               <div className="flex justify-center mb-4">
                 <ThemeToggle />
               </div>
@@ -223,7 +223,7 @@ const Navbar = () => {
                   <Link
                     href="/login"
                     onClick={closeMenu}
-                    className="block text-center rounded-xl py-3 text-[#f5dec9]/80 hover:bg-white/5 transition"
+                    className="block text-center rounded-xl py-3 text-slate-600 dark:text-[#f5dec9]/80 hover:bg-slate-50 dark:hover:bg-white/5 transition"
                   >
                     Login
                   </Link>
