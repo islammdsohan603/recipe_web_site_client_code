@@ -27,9 +27,8 @@ export default function RootLayout({ children }) {
       suppressHydrationWarning
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">
 
-
+      <body className="min-h-full flex flex-col bg-white dark:bg-[#0c0604] text-zinc-900 dark:text-white transition-colors duration-300">
         <Providers>
           <div>
             <Navbar />
@@ -42,7 +41,6 @@ export default function RootLayout({ children }) {
             <Footer />
           </div>
         </Providers>
-
       </body>
     </html>
   );
