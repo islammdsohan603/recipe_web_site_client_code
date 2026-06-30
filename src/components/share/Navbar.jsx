@@ -83,7 +83,7 @@ const Navbar = () => {
           {/* Desktop Auth */}
           <div className="flex items-center gap-4">
             <div className="hidden md:block">
-               <ThemeToggle />
+              <ThemeToggle />
             </div>
             {isPending ? (
               <div className="hidden md:flex items-center gap-3 animate-pulse">
@@ -93,13 +93,10 @@ const Navbar = () => {
             ) : user ? (
               <div className="hidden md:flex items-center gap-2">
                 <Link href={'/dashboard/user/profile'}>
-                  <Image
-                    src={user?.image}
-                    alt={user?.name}
-                    width={40}
-                    height={40}
-                    className=" object-cover rounded-full"
-                  />
+                  <Avatar className="w-full h-full">
+                    <Avatar.Image alt={user?.name} src={user?.image} />
+                    <Avatar.Fallback>{user?.name?.charAt(0)}</Avatar.Fallback>
+                  </Avatar>
                 </Link>
 
                 <button
@@ -182,7 +179,7 @@ const Navbar = () => {
             {/* Auth Mobile */}
             <div className="pt-4 mt-4 border-t border-orange-950/30 space-y-3">
               <div className="flex justify-center mb-4">
-                 <ThemeToggle />
+                <ThemeToggle />
               </div>
               {isPending ? (
                 <div className="flex items-center gap-3 animate-pulse">
