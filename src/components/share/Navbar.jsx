@@ -99,7 +99,7 @@ const Navbar = () => {
                       src={user?.image}
                       width={40}
                       height={40}
-                      className=" object-cover"
+                      className=" object-cover rounded-full"
                     />
                     <Avatar.Fallback>{user?.name?.charAt(0)}</Avatar.Fallback>
                   </Avatar>
