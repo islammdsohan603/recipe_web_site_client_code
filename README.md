@@ -42,6 +42,10 @@ enjoy a seamless and interactive user experience.
 
 ---
 
+# Live Link
+
+https://recipehub-roan.vercel.app/
+
 # 💻 Technology Stack
 
 ## Frontend
