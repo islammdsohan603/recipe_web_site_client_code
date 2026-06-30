@@ -54,7 +54,11 @@ const DashboardSidebar = () => {
       label: 'Manage Users',
       href: '/dashboard/admin/users',
     },
-
+    {
+      icon: ChefHat,
+      label: 'Manage Recipes',
+      href: '/dashboard/admin/manage-recipes',
+    },
     { icon: BarChart3, label: 'Reports', href: '/dashboard/admin/reports' },
   ];
 
