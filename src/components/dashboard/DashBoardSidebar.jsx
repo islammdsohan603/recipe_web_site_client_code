@@ -149,7 +149,7 @@ const DashboardSidebar = () => {
 
       {/* Mobile Sidebar */}
       <div
-        className={`fixed top-0 left-0 h-full w-72 bg-[#1a0f0c] border-r border-orange-900/30 z-50 transform transition-transform duration-300 lg:hidden ${
+        className={`fixed top-0 left-0 h-full w-72 bg-card border-r border-orange-900/30 z-50 transform transition-transform duration-300 lg:hidden ${
           mobileOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
@@ -163,7 +163,7 @@ const DashboardSidebar = () => {
       </div>
 
       {/* Desktop Sidebar */}
-      <aside className="hidden lg:block w-64 shrink-0 bg-[#1a0f0c] border-r border-orange-900/30 rounded-l-2xl overflow-hidden">
+      <aside className="hidden lg:block w-64 shrink-0 bg-card border-r border-orange-900/30 rounded-l-2xl overflow-hidden">
         {navContent}
       </aside>
     </>

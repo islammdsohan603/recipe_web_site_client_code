@@ -94,7 +94,13 @@ const Navbar = () => {
               <div className="hidden md:flex items-center gap-2">
                 <Link href={'/dashboard/user/profile'}>
                   <Avatar className="w-full h-full">
-                    <Avatar.Image alt={user?.name} src={user?.image} />
+                    <Avatar.Image
+                      alt={user?.name}
+                      src={user?.image}
+                      width={40}
+                      height={40}
+                      className=" object-cover"
+                    />
                     <Avatar.Fallback>{user?.name?.charAt(0)}</Avatar.Fallback>
                   </Avatar>
                 </Link>
