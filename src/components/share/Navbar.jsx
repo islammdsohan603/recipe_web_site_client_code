@@ -9,6 +9,7 @@ import { authClient, useSession } from '@/lib/auth-client';
 import { Avatar } from '@heroui/react';
 import { toast } from 'react-toastify';
 import Image from 'next/image';
+import ThemeToggle from './ThemeToggle';
 
 const Navbar = () => {
   const pathname = usePathname();
@@ -81,6 +82,9 @@ const Navbar = () => {
 
           {/* Desktop Auth */}
           <div className="flex items-center gap-4">
+            <div className="hidden md:block">
+               <ThemeToggle />
+            </div>
             {isPending ? (
               <div className="hidden md:flex items-center gap-3 animate-pulse">
                 <div className="h-9 w-9 rounded-full bg-orange-200/20" />
@@ -177,6 +181,9 @@ const Navbar = () => {
 
             {/* Auth Mobile */}
             <div className="pt-4 mt-4 border-t border-orange-950/30 space-y-3">
+              <div className="flex justify-center mb-4">
+                 <ThemeToggle />
+              </div>
               {isPending ? (
                 <div className="flex items-center gap-3 animate-pulse">
                   <div className="h-9 w-9 rounded-full bg-orange-200/20" />
